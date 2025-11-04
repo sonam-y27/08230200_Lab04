@@ -1,0 +1,86 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Learning Journey</title>
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">✨ My Learning Journey</h1>
+      <nav>
+        <a href="{% url 'index' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class="nav-link {% if request.path == '/aboutMe.html' %}active{% endif %}">About Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Let's GOoo!</h2>
+      <p class="lead">This page is all about my learning journey throughout this semester. Let's walk through this journey together.</p>
+    </section>
+
+    <section class="cards">
+      <!-- Skills -->
+      <article class="card">
+        <h3>Skills</h3>
+        <ul>
+          {% for skill in skills %}
+            <li><strong>{{ skill.title }}:</strong> {{ skill.description }}</li>
+          {% empty %}
+            <li>No skills added yet.</li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <!-- Learning Experiences -->
+      <article class="card">
+        <h3>Learning Experiences</h3>
+        <ol>
+          {% for exp in experiences %}
+            <li><strong>{{ exp.title }}:</strong> {{ exp.description }}</li>
+          {% empty %}
+            <li>No learning experiences added yet.</li>
+          {% endfor %}
+        </ol>
+      </article>
+
+      <!-- Challenges -->
+      <article class="card">
+        <h3>Challenges</h3>
+        <ul>
+          {% for challenge in challenges %}
+            <li><strong>{{ challenge.title }}:</strong> {{ challenge.description }}</li>
+          {% empty %}
+            <li>No challenges added yet.</li>
+          {% endfor %}
+        </ul>
+      </article>
+    </section>
+
+    <!-- Reflection -->
+    <section class="reflection">
+      <h3>Reflection</h3>
+      {% for refl in reflections %}
+        <p>{{ refl.content }}</p>
+      {% empty %}
+        <p>No reflections added yet.</p>
+      {% endfor %}
+      <a class="cta" href="{% url 'about' %}">Learn more about me →</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 My Learning Journey</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+
+   

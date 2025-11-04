@@ -1,0 +1,83 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Me — Learning Journey</title>
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">About Me</h1>
+      <nav>
+        <a href="{% url 'index' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class="nav-link {% if request.path == '/aboutMe.html' %}active{% endif %}">About Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container about-grid">
+    <!-- Profile Card -->
+    <aside class="profile-card">
+      <div class="avatar-wrap">
+        <img src="{% static 'images/photo_2025-11-04_21-30-23.jpg' %}" alt="Profile picture" class="avatar">
+      </div>
+      <h2>Sonam Yangchen</h2>
+      <p class="muted">B.Ed IT · Samtse College of Education</p>
+    </aside>
+
+    <!-- Bio and Dynamic Lists -->
+    <section class="bio">
+      <h3>Bio</h3>
+      <p>Hello! You’re warmly invited to explore my website showcasing my learning journey. 
+        I am a 3rd-year student at Samtse College of Education,
+         striving to put my best efforts into everything I do.
+         Enjoy discovering my experiences, skills, and growth along the way!</p>
+
+      <div class="split">
+        <!-- Hobbies -->
+        <div>
+          <h4>Hobbies</h4>
+          <ul>
+            {% for hobby in hobbies %}
+              <li>{{ hobby.name }}</li>
+            {% empty %}
+              <li>No hobbies added yet.</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Strengths -->
+        <div>
+          <h4>Strengths</h4>
+          <ul>
+            {% for strength in strengths %}
+              <li>{{ strength.name }}</li>
+            {% empty %}
+              <li>No strengths added yet.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Weaknesses -->
+      <h4>Weaknesses</h4>
+      <ul>
+        {% for weakness in weaknesses %}
+          <li>{{ weakness.name }}</li>
+        {% empty %}
+          <li>No weaknesses added yet.</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Back to <a href="{% url 'index' %}">Home</a> · &copy; 2025 My Learning Journey</p>
+    </div>
+  </footer>
+</body>
+</html>
